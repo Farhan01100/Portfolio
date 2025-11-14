@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sk Farhan Ali - Résumé</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .contact-info {
+            font-size: 0.9em;
+            color: #555;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            background-color: #f4f4f4;
+            padding: 8px 5px;
+            border-left: 4px solid #2c3e50;
+            color: #2c3e50;
+            font-size: 1.2em;
+        }
+        .objective {
+            font-style: italic;
+            text-align: justify;
+        }
+        .skills-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .skills-list li {
+            display: inline-block;
+            background: #e0e7ff;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .print-button {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background: #1a252f;
+        }
+        
+        @media print {
+            button {
+                display: none;
+            }
+            body {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Sk Farhan Ali</h1>
+        <div class="contact-info">
+            <p id="contact-details">
+                Dhunki, Panchla, Howrah, West Bengal, India<br>
+                Email: <a href="mailto:skfarhanali800@gmail.com">skfarhanali800@gmail.com</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Career Objective</h2>
+        <p class="objective">To become a skilled AI and ML Engineer focusing on innovative technology.</p>
+    </div>
+
+    <div class="section">
+        <h2>Education</h2>
+        <p><strong>Basudevpur Ramkrishna Vidyamandir (H.S)</strong></p>
+        <p id="classDisplay">Class 9, Section A</p>
+        <p>Student since Class 5, continuing till Class 12.</p>
+    </div>
+
+    <div class="section">
+        <h2>Skills</h2>
+        <ul class="skills-list">
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>Electronics</li>
+            <li>Circuits</li>
+            <li>Soldering</li>
+            <li>Hardware Testing</li>
+            <li>AI/ML Basics</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Languages</h2>
+        <p>English, Bengali, Hindi, Arabic</p>
+    </div>
+
+    <div class="section">
+        <h2>Hobbies & Interests</h2>
+        <p>Coding, Electronics Experiments</p>
+    </div>
+
+    <div class="print-button">
+        <button onclick="window.print()">Print / Save as PDF</button>
+    </div>
+
+    <script>
+        // Function to calculate age
+        function calculateAge(birthday) { // birthday is a date object
+            const ageDifMs = Date.now() - birthday.getTime();
+            const ageDate = new Date(ageDifMs); // milliseconds from epoch
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
+        }
+
+        // Function to calculate current class
+        function calculateCurrentClass() {
+            // Assuming the academic year starts in April and you were in Class 9 in 2025.
+            const baseYear = 2025;
+            const baseClass = 9;
+            const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1; // January is 1
+
+            // If current month is January to March, the academic year is still the previous year.
+            let academicYear = currentYear;
+            if (currentMonth < 4) {
+                academicYear = currentYear - 1;
+            }
+
+            const yearsPassed = academicYear - baseYear;
+            const currentClass = baseClass + yearsPassed;
+
+            // Don't go beyond Class 12
+            if (currentClass > 12) {
+                return "Class 12 (Completed)";
+            } else if (currentClass < 1) {
+                return "Class 1";
+            } else {
+                return `Class ${currentClass}, Section A`;
+            }
+        }
+
+        // Set your date of birth: 20 November 2010
+        const dob = new Date(2010, 10, 20); // Note: Month is 0-indexed (10 = November)
+
+        // Update the HTML content
+        document.getElementById('classDisplay').textContent = calculateCurrentClass();
+
+        // Update the contact info with age
+        const age = calculateAge(dob);
+        const contactDetails = document.getElementById('contact-details');
+        contactDetails.innerHTML = `Age: ${age} years<br>` + contactDetails.innerHTML;
+    </script>
+</body>
+</html>
